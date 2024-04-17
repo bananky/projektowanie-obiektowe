@@ -1,5 +1,8 @@
 package com.example.wzorcekreacyjne.service
 
+import org.springframework.stereotype.Service
+
+@Service
 object AuthService {
     private val userCredentials = mapOf(
         "admin" to "admin123",
