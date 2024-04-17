@@ -11,3 +11,27 @@
 :x: 4.5 wymaganie 4 
 
 :x: 5.0 wymaganie 5 
+
+**Zadanie 2** Wzorce architektury
+
+:x: 3.0 wymaganie 1 
+
+:x: 3.5 wymaganie 2 
+
+:x: 4.0 wymaganie 3
+
+:x: 4.5 wymaganie 4
+
+:x: 5.0 wymaganie 5
+
+**Zadanie 3** Wzorce kreacyjne
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/projektowanie-obiektowe/commit/6285af73852605972e638e81f57bfcf0ae29f421)
+
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/bananky/projektowanie-obiektowe/commit/f1fa10c63a614a72538a11b68a2cbf9d5b3887a9)
+
+:x: 4.0 wymaganie 3
+
+:x: 4.5 wymaganie 4
+
+:x: 5.0 wymaganie 5
