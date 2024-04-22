@@ -14,11 +14,11 @@
 
 **Zadanie 2** Wzorce architektury
 
-:white_check_mark: 3.0 wymaganie 1 [Link do commita 1] (https://github.com/bananky/projektowanie-obiektowe/commit/d399dfdd774a6b76f4ff5022d423350e1bbfdfc4) 
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/projektowanie-obiektowe/commit/d399dfdd774a6b76f4ff5022d423350e1bbfdfc4) 
 
-:x: 3.5 wymaganie 2 
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2] 
 
-:x: 4.0 wymaganie 3
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/bananky/projektowanie-obiektowe/commit/d99b7cadffd2521eb3ec5d5913065a79f0bb68e7)
 
 :x: 4.5 wymaganie 4
 
