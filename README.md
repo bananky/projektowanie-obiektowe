@@ -20,7 +20,7 @@
 
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/bananky/projektowanie-obiektowe/commit/d99b7cadffd2521eb3ec5d5913065a79f0bb68e7)
 
-:x: 4.5 wymaganie 4
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/bananky/projektowanie-obiektowe/commit/0598e87bf0d63c33e907112b0217acb08d9593e5)
 
 :x: 5.0 wymaganie 5
 
