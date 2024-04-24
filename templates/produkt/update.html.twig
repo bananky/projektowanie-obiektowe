@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zaktualizuj produkt{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<h1>Zaktualizuj produkt</h1>
+    <form method="put" action="{{ path('zaktualizuj-produkt', {'id': product.id}) }}">
+        <label for="name">Nowa nazwa produktu:</label><br>
+        <input type="text" id="name" name="name" value="{{ product.name }}"><br>
+        <label for="price">Nowa cena:</label><br>
+        <input type="text" id="price" name="price" value="{{ product.price }}"><br><br>
+        <button type="submit">Aktualizuj</button>
+    </form>
+{% endblock %}

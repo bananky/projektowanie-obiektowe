@@ -47,7 +47,7 @@ class Users
         return $this;
     }
 
-    public function getSurname(): ?array
+    public function getSurname(): ?string
     {
         return $this->surname;
     }

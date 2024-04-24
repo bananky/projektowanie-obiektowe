@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wszystkie produkty{% endblock %}
+{% block title %}Pokaz pracownika{% endblock %}
 
 {% block body %}
 <style>
@@ -8,10 +8,7 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<h1>Wszystkie produkty</h1>
-    <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }}</li>
-        {% endfor %}
-    </ul>
+<h1>Pokaż pracownika</h1>
+    <p>Stanowisko: {{ worker.type }}</p>
+    <p>Stawka: {{ worker.salary }}</p>
 {% endblock %}

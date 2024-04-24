@@ -20,83 +20,97 @@ class WorkersController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/workers', name: 'dodaj-pracownika', methods: ['POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/dodaj-pracownika', name: 'dodaj-pracownika', methods: ['GET','POST'])]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $data = json_decode($request->getContent(), true);
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
 
-        $worker = new Workers();
-        $worker->setType($data['type']);
-        $worker->setSalary($data['salary']);
+            $worker = new Workers();
+            $worker->setType($data['type']);
+            $worker->setSalary($data['salary']);
 
-        $entityManager->persist($worker);
-        $entityManager->flush();
+            $entityManager->persist($worker);
+            $entityManager->flush();
+            $this->addFlash('success', 'Worker created successfully');
 
-        return new JsonResponse(['message' => 'Worker created successfully'], Response::HTTP_CREATED);
+            return $this->redirectToRoute('pokaz-pracownikow');
+        }
+
+        return $this->render('workers/create.html.twig');
     }
+
+    
     #[Route('/workers', name: 'pokaz-pracownikow', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $workers = $entityManager->getRepository(Workers::class)->findAll();
 
-        $formattedWorkers = [];
-        foreach ($workers as $worker) {
-            $formattedWorkers[] = [
-                'id' => $worker->getId(),
-                'type' => $worker->getType(),
-                'salary' => $worker->getSalary(),
-            ];
-        }
-
-        return new JsonResponse($formattedWorkers);
+        return $this->render('workers/index.html.twig', [
+            'workers' => $workers,
+        ]);
     }
 
-    #[Route('/workers/{id}', name: 'pokaz-pracownika', methods: ['GET'])]
+
+    #[Route('/pokaz-pracownika/{id}', name: 'pokaz-pracownika', methods: ['GET'])]
     public function show($id, EntityManagerInterface $entityManager): Response
     {
         $worker = $entityManager->getRepository(Workers::class)->find($id);
 
-        $formattedWorker[] = [
-            'id' => $worker->getId(),
-            'type' => $worker->getType(),
-            'salary' => $worker->getSalary(),
-        ];
-
-        return new JsonResponse($formattedWorker);
-    }
-
-    #[Route('/workers/{id}', name: 'zaktualizuj-pracownika', methods: ['PUT'])]
-    public function update($id, Request $request, EntityManagerInterface $entityManager): JsonResponse
-    {
-        $data = json_decode($request->getContent(), true);
-
-        $existingWorker = $entityManager->getRepository(Workers::class)->find($id);
-
-        if ($existingWorker) {
-            $existingWorker->setType($data['type']);
-            $existingWorker->setSalary($data['salary']);
-            
-            $entityManager->persist($existingWorker);
-            $entityManager->flush();
-
-            return new JsonResponse(['message' => 'Worker updated successfully'], Response::HTTP_OK);
-        } else {
-            return new JsonResponse(['message' => 'Worker not found'], Response::HTTP_NOT_FOUND);
+        if (!$worker) {
+            throw $this->createNotFoundException('Worker not found');
         }
+
+        return $this->render('workers/show.html.twig', [
+            'worker' => $worker,
+        ]);
     }
 
-    #[Route('/workers/{id}', name: 'usun-pracownika', methods: ['DELETE'])]
-    public function delete($id, EntityManagerInterface $entityManager): JsonResponse
+
+
+    #[Route('/zaktualizuj-pracownika/{id}', name: 'zaktualizuj-pracownika', methods: ['GET','PUT'])]
+    public function update($id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $worker = $entityManager->getRepository(Workers::class)->find($id);
 
-        if ($worker) {
-            $entityManager->remove($worker);
+        if (!$worker) {
+            throw $this->createNotFoundException('Worker not found');
+        }
+
+        if ($request->isMethod('PUT')) {
+            $data = $request->request->all();
+
+            $worker->setType($data['type']);
+            $worker->setSalary($data['salary']);
+
             $entityManager->flush();
 
-            return new JsonResponse(['message' => 'Worker deleted successfully'], Response::HTTP_OK);
-        } else {
-            return new JsonResponse(['message' => 'Worker not found'], Response::HTTP_NOT_FOUND);
+            $this->addFlash('success', 'Worker updated successfully');
+
+            return $this->redirectToRoute('pokaz-pracownika', ['id' => $worker->getId()]);
         }
+
+        return $this->render('workers/update.html.twig', [
+            'worker' => $worker,
+        ]);
     }
+
+    #[Route('/usun-pracownika/{id}', name: 'usun-pracownika', methods: ['GET','PUT','DELETE'])]
+    public function delete($id, EntityManagerInterface $entityManager): Response
+    {
+        $worker = $entityManager->getRepository(Workers::class)->find($id);
+
+        if (!$worker) {
+            throw $this->createNotFoundException('Worker not found');
+        }
+
+        $entityManager->remove($worker);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Worker deleted successfully');
+
+        return $this->redirectToRoute('pokaz-pracownikow');
+    }
+
+
 }

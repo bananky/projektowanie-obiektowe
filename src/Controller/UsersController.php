@@ -19,87 +19,96 @@ class UsersController extends AbstractController
     //         'controller_name' => 'UsersController',
     //     ]);
     // }
-    #[Route('/users', name: 'dodaj-uzytkownika', methods: ['POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/dodaj-uzytkownika', name: 'dodaj-uzytkownika', methods: ['GET','POST'])]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $data = json_decode($request->getContent(), true);
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
 
-        $user = new Users();
-        $user->setName($data['name']);
-        $user->setSurname($data['surname']);
-        $user->setEmail($data['email']);
+            $user = new Users();
+            $user->setName($data['name']);
+            $user->setSurname($data['surname']);
+            $user->setEmail($data['email']);
+    
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+            $this->addFlash('success', 'User created successfully');
 
-        return new JsonResponse(['message' => 'User created successfully'], Response::HTTP_CREATED);
+            return $this->redirectToRoute('pokaz-uzytkownikow');
+        }
+
+        return $this->render('users/create.html.twig');
     }
+
     #[Route('/users', name: 'pokaz-uzytkownikow', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $users = $entityManager->getRepository(Users::class)->findAll();
 
-        $formattedUsers = [];
-        foreach ($users as $user) {
-            $formattedUsers[] = [
-                'id' => $user->getId(),
-                'name' => $user->getName(),
-                'surname' => $user->getSurname(),
-                'email' => $user->getEmail(),
-            ];
-        }
-
-        return new JsonResponse($formattedUsers);
+        return $this->render('users/index.html.twig', [
+            'users' => $users,
+        ]);
     }
 
-    #[Route('/users/{id}', name: 'pokaz-uzytkownika', methods: ['GET'])]
+
+    #[Route('/pokaz-uzytkownika/{id}', name: 'pokaz-uzytkownika', methods: ['GET'])]
     public function show($id, EntityManagerInterface $entityManager): Response
     {
         $user = $entityManager->getRepository(Users::class)->find($id);
 
-        $formattedUser = [
-            'id' => $user->getId(),
-            'name' => $user->getName(),
-            'surname' => $user->getSurname(),
-            'email' => $user->getEmail(),
-        ];
-
-        return new JsonResponse($formattedUser);
-    }
-
-    #[Route('/users/{id}', name: 'zaktualizuj-uzytkownika', methods: ['PUT'])]
-    public function update($id, Request $request, EntityManagerInterface $entityManager): JsonResponse
-    {
-        $data = json_decode($request->getContent(), true);
-
-        $existingUser = $entityManager->getRepository(Users::class)->find($id);
-
-        if ($existingUser) {
-            $existingUser->setName($data['name']);
-            $existingUser->setSurname($data['surname']);
-            $existingUser->setEmail($data['email']);
-            
-            $entityManager->persist($existingUser);
-            $entityManager->flush();
-
-            return new JsonResponse(['message' => 'User updated successfully'], Response::HTTP_OK);
-        } else {
-            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
         }
+
+        return $this->render('users/show.html.twig', [
+            'user' => $user,
+        ]);
     }
 
-    #[Route('/users/{id}', name: 'app_user_delete', methods: ['DELETE'])]
-    public function delete($id, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/zaktualizuj-uzytkownika/{id}', name: 'zaktualizuj-uzytkownika', methods: ['GET','PUT'])]
+    public function update($id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $entityManager->getRepository(Users::class)->find($id);
 
-        if ($user) {
-            $entityManager->remove($user);
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        if ($request->isMethod('PUT')) {
+            $data = $request->request->all();
+
+            $user->setName($data['name']);
+            $user->setSurname($data['surname']);
+            $user->setEmail($data['email']);
+
             $entityManager->flush();
 
-            return new JsonResponse(['message' => 'User deleted successfully'], Response::HTTP_OK);
-        } else {
-            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+            $this->addFlash('success', 'User updated successfully');
+
+            return $this->redirectToRoute('pokaz-uzytkownika', ['id' => $user->getId()]);
         }
+
+        return $this->render('users/update.html.twig', [
+            'user' => $user,
+        ]);
     }
+
+    #[Route('/usun-uzytkownika/{id}', name: 'usun-uzytkownika', methods: ['GET','PUT','DELETE'])]
+    public function delete($id, EntityManagerInterface $entityManager): Response
+    {
+        $user = $entityManager->getRepository(Users::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'User deleted successfully');
+
+        return $this->redirectToRoute('pokaz-uzytkownikow');
+    }
+
 }

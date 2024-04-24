@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zaktualizuj pracownika{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<h1>Zaktualizuj pracownika</h1>
+    <form method="put" action="{{ path('zaktualizuj-pracownika', {'id': worker.id}) }}">
+        <label for="type">Nowa nazwa stanowiska:</label><br>
+        <input type="text" id="type" name="type" value="{{ worker.type }}"><br>
+        <label for="salary">Nowa stawka:</label><br>
+        <input type="text" id="salary" name="salary" value="{{ worker.salary }}"><br><br>
+        <button type="submit">Aktualizuj</button>
+    </form>
+{% endblock %}

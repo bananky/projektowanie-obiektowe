@@ -20,38 +20,36 @@ class ProduktController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/produkt', name: 'dodaj-produkt', methods: ['POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/dodaj-produkt', name: 'dodaj-produkt', methods: ['GET', 'POST'])]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $data = json_decode($request->getContent(), true);
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
 
-        $produkt = new Produkt(); 
-        $produkt->setName($data['name']);
-        $produkt->setPrice($data['price']);
+            $produkt = new Produkt();
+            $produkt->setName($data['name']);
+            $produkt->setPrice($data['price']);
 
-        $entityManager->persist($produkt);
-        $entityManager->flush();
+            $entityManager->persist($produkt);
+            $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Product created successfully'], Response::HTTP_CREATED);
+            $this->addFlash('success', 'Product created successfully');
 
+            return $this->redirectToRoute('pokaz-wszystko');
+        }
+
+        return $this->render('produkt/create.html.twig');
     }
 
 
-    #[Route('/produkt', name: 'pokaz-wszystko', methods: ['GET' ])]
+    #[Route('/produkt', name: 'pokaz-wszystko', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $products = $entityManager->getRepository(Produkt::class)->findAll();
 
-        $formattedProducts = [];
-        foreach ($products as $product) {
-            $formattedProducts[] = [
-                'id' => $product->getId(),
-                'name' => $product->getName(),
-                'price' => $product->getPrice()
-            ];
-        }
-
-        return new JsonResponse($formattedProducts);
+        return $this->render('produkt/index.html.twig', [
+            'products' => $products,
+        ]);
     }
 
     #[Route('/produkt/{id}', name: 'pokaz-produkt', methods: ['GET'])]
@@ -60,55 +58,60 @@ class ProduktController extends AbstractController
         $product = $entityManager->getRepository(Produkt::class)->find($id);
 
         if (!$product) {
-            return new JsonResponse(['message' => 'Product not found'], Response::HTTP_NOT_FOUND);
+            throw $this->createNotFoundException('Product not found');
         }
 
-        $formattedProduct = [
-            'id' => $product->getId(),
-            'name' => $product->getName(),
-            'price' => $product->getPrice()
-            
-        ];
-
-        return new JsonResponse($formattedProduct);
+        return $this->render('produkt/show.html.twig', [
+            'product' => $product,
+        ]);
     }
 
 
 
-    #[Route('/produkt/{id}', name: 'zaktualizuj-produkt', methods: ['PUT'])]
-    public function update($id, Request $request, EntityManagerInterface $entityManager): JsonResponse
-    {
-        $data = json_decode($request->getContent(), true);
-
-        $existingProduct = $entityManager->getRepository(Produkt::class)->find($id);
-
-        if ($existingProduct) {
-            $existingProduct->setName($data['name']);
-            $existingProduct->setPrice($data['price']);
-
-            $entityManager->flush();
-
-            return new JsonResponse(['message' => 'Product updated successfully'], Response::HTTP_OK);
-        } else {
-            return new JsonResponse(['message' => 'Product not found'], Response::HTTP_NOT_FOUND);
-        }
-    }
-
-
-
-    #[Route('/produkt/{id}', name: 'usun-produkt', methods: ['DELETE'])]
-    public function delete($id, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/zaktualizuj-produkt/{id}', name: 'zaktualizuj-produkt', methods: ['GET','PUT'])]
+    public function update($id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $product = $entityManager->getRepository(Produkt::class)->find($id);
 
-        if ($product) {
-            $entityManager->remove($product);
+        if (!$product) {
+            throw $this->createNotFoundException('Product not found');
+        }
+
+        if ($request->isMethod('PUT')) {
+            $data = $request->request->all();
+
+            $product->setName($data['name']);
+            $product->setPrice($data['price']);
+
             $entityManager->flush();
 
-            return new JsonResponse(['message' => 'Product deleted successfully'], Response::HTTP_OK);
-        } else {
-            return new JsonResponse(['message' => 'Product not found'], Response::HTTP_NOT_FOUND);
+            $this->addFlash('success', 'Product updated successfully');
+
+            return $this->redirectToRoute('pokaz-produkt', ['id' => $product->getId()]);
         }
+
+        return $this->render('produkt/update.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
+
+
+    #[Route('/usun-produkt/{id}', name: 'usun-produkt', methods: ['GET','POST','DELETE'])]
+    public function delete($id, EntityManagerInterface $entityManager): Response
+    {
+        $product = $entityManager->getRepository(Produkt::class)->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException('Product not found');
+        }
+
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Product deleted successfully');
+
+        return $this->redirectToRoute('pokaz-wszystko');
     }
 }
 
