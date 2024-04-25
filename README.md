@@ -16,13 +16,13 @@
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/projektowanie-obiektowe/commit/d399dfdd774a6b76f4ff5022d423350e1bbfdfc4) 
 
-:white_check_mark: 3.5 wymaganie 2 [Link do commita 2] 
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/bananky/projektowanie-obiektowe/commit/ae4075924894e3cb25c1c42e0fd9fdc53d770f85) 
 
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/bananky/projektowanie-obiektowe/commit/d99b7cadffd2521eb3ec5d5913065a79f0bb68e7)
 
 :white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/bananky/projektowanie-obiektowe/commit/0598e87bf0d63c33e907112b0217acb08d9593e5)
 
-:x: 5.0 wymaganie 5
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/bananky/projektowanie-obiektowe/commit/c93888678631324be8cc340120517c281b313d21)
 
 **Zadanie 3** Wzorce kreacyjne
 
