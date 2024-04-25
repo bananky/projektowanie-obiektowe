@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel administratora {% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Panel administratora</h1>
+    <h2>Produkty</h2>
+    <ul>
+        <li><a href="{{ path('pokaz-wszystko') }}">Wszystkie produkty</a></li>
+        <li><a href="{{ path('dodaj-produkt') }}">Dodaj produkt</a></li>
+        
+    </ul>
+    <h2>Users</h2>
+    <ul>
+        <li><a href="{{ path('pokaz-uzytkownikow') }}">Wszyscy uzytkownicy</a></li>
+        <li><a href="{{ path('dodaj-uzytkownika') }}">Dodaj uzytkownika</a></li>
+        
+    </ul>
+    <h2>Workers</h2>
+    <ul>
+        <li><a href="{{ path('pokaz-pracownikow') }}">Wszyscy pracownicy</a></li>
+        <li><a href="{{ path('dodaj-pracownika') }}">Dodaj pracownika</a></li>
+        
+    </ul>
+    
+</div>
+{% endblock %}

@@ -9,9 +9,14 @@
 </style>
 
 <h1>Wszystkie produkty</h1>
-    <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }}</li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for product in products %}
+        <li>
+            <a href="{{ path('zaktualizuj-produkt', {'id': product.id}) }}">
+                {{ product.name }} - {{ product.price }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{{ path('admin_panel') }}">Panel administratora</a>
 {% endblock %}

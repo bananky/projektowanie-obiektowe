@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Zaktualizuj uzytkownika{% endblock %}
+{% block title %}Zaktualizuj użytkownika{% endblock %}
 
 {% block body %}
 <style>
@@ -8,14 +8,17 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<h1>Zaktualizuj uzytkownika</h1>
-    <form method="put" action="{{ path('zaktualizuj-uzytkownika', {'id': user.id}) }}">
-        <label for="name">Imię:</label><br>
-        <input type="text" id="name" name="name" value="{{ user.name }}"><br>
-        <label for="price">Nazwisko:</label><br>
-        <input type="text" id="surname" name="surname" value="{{ user.surname }}"><br>
-        <label for="price">Email:</label><br>
-        <input type="text" id="email" name="email" value="{{ user.email }}"><br><br>
-        <button type="submit">Aktualizuj</button>
-    </form>
+<h1>Zaktualizuj użytkownika</h1>
+<form method="put" action="{{ path('zaktualizuj-uzytkownika', {'id': user.id}) }}">
+    <label for="name">Imię:</label><br>
+    <input type="text" id="name" name="name" value="{{ user.name }}"><br>
+    <label for="price">Nazwisko:</label><br>
+    <input type="text" id="surname" name="surname" value="{{ user.surname }}"><br>
+    <label for="price">Email:</label><br>
+    <input type="text" id="email" name="email" value="{{ user.email }}"><br><br>
+    <button type="submit">Aktualizuj</button>
+</form>
+<form method="post" action="{{ path('usun-uzytkownika', {'id': user.id}) }}" onsubmit="return confirm('Czy na pewno chcesz usunąć tego uzytkownika?');">
+    <button type="submit">Usuń</button>
+</form>
 {% endblock %}

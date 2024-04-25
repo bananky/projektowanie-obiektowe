@@ -9,11 +9,14 @@
 </style>
 
 <h1>Zaktualizuj pracownika</h1>
-    <form method="put" action="{{ path('zaktualizuj-pracownika', {'id': worker.id}) }}">
-        <label for="type">Nowa nazwa stanowiska:</label><br>
-        <input type="text" id="type" name="type" value="{{ worker.type }}"><br>
-        <label for="salary">Nowa stawka:</label><br>
-        <input type="text" id="salary" name="salary" value="{{ worker.salary }}"><br><br>
-        <button type="submit">Aktualizuj</button>
-    </form>
+<form method="put" action="{{ path('zaktualizuj-pracownika', {'id': worker.id}) }}">
+    <label for="type">Nowa nazwa stanowiska:</label><br>
+    <input type="text" id="type" name="type" value="{{ worker.type }}"><br>
+    <label for="salary">Nowa stawka:</label><br>
+    <input type="text" id="salary" name="salary" value="{{ worker.salary }}"><br><br>
+    <button type="submit">Aktualizuj</button>
+</form>
+<form method="post" action="{{ path('usun-pracownika', {'id': worker.id}) }}" onsubmit="return confirm('Czy na pewno chcesz usunąć tego pracownika?');">
+    <button type="submit">Usuń</button>
+</form>
 {% endblock %}

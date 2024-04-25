@@ -94,7 +94,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/usun-uzytkownika/{id}', name: 'usun-uzytkownika', methods: ['GET','PUT','DELETE'])]
+    #[Route('/usun-uzytkownika/{id}', name: 'usun-uzytkownika', methods: ['GET','POST','DELETE'])]
     public function delete($id, EntityManagerInterface $entityManager): Response
     {
         $user = $entityManager->getRepository(Users::class)->find($id);

@@ -9,9 +9,14 @@
 </style>
 
 <h1>Wszyscy pracownicy</h1>
-    <ul>
-        {% for worker in workers %}
-            <li>{{ worker.type }} - {{ worker.salary }}</li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for worker in workers %}
+        <li>
+            <a href="{{ path('zaktualizuj-pracownika', {'id': worker.id}) }}">
+                {{ worker.type }} - {{ worker.salary }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{{ path('admin_panel') }}">Panel administratora</a>
 {% endblock %}

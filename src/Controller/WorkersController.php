@@ -95,7 +95,7 @@ class WorkersController extends AbstractController
         ]);
     }
 
-    #[Route('/usun-pracownika/{id}', name: 'usun-pracownika', methods: ['GET','PUT','DELETE'])]
+    #[Route('/usun-pracownika/{id}', name: 'usun-pracownika', methods: ['GET','POST','DELETE'])]
     public function delete($id, EntityManagerInterface $entityManager): Response
     {
         $worker = $entityManager->getRepository(Workers::class)->find($id);
