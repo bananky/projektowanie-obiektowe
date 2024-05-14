@@ -12,23 +12,22 @@ import (
 const (
 	BaseURL         = "https://api.openweathermap.org"
 	WeatherEndpoint = "/data/2.5/weather"
-	LongLat         = "?lat=44.34&lon=10.99"
 	APIParameter    = "&appid="
 )
 
 type WeatherProxy interface {
-	TakeWeather() (models.WeatherModel, error)
+	TakeWeather(lat, lon float64) (models.WeatherModel, error)
 }
 
 type WeatherProxyImpl struct{}
 
-func (s *WeatherProxyImpl) TakeWeather() (models.WeatherModel, error) {
+func (s *WeatherProxyImpl) TakeWeather(lat, lon float64) (models.WeatherModel, error) {
 	OpenWeatherApi := os.Getenv("OPEN_WEATHER_API")
 	if OpenWeatherApi == "" {
 		return models.WeatherModel{}, fmt.Errorf("API key is not set or empty")
 	}
 
-	url := BaseURL + WeatherEndpoint + LongLat + APIParameter + OpenWeatherApi
+	url := fmt.Sprintf("%s%s?lat=%f&lon=%f%s%s", BaseURL, WeatherEndpoint, lat, lon, APIParameter, OpenWeatherApi)
 	log.Println("Fetching weather data from:", url)
 
 	resp, err := http.Get(url)
@@ -44,6 +43,17 @@ func (s *WeatherProxyImpl) TakeWeather() (models.WeatherModel, error) {
 	var weather models.WeatherModel
 	if err := json.NewDecoder(resp.Body).Decode(&weather); err != nil {
 		return models.WeatherModel{}, err
+	}
+
+	weather.Model.ID = 0
+	weather.Coord.Model.ID = 0
+	weather.Main.Model.ID = 0
+	weather.Wind.Model.ID = 0
+	weather.Rain.Model.ID = 0
+	weather.Clouds.Model.ID = 0
+	weather.Sys.Model.ID = 0
+	for i := range weather.Weather {
+		weather.Weather[i].Model.ID = 0
 	}
 
 	return weather, nil
