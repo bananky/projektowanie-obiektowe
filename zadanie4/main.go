@@ -23,9 +23,7 @@ func main() {
 		panic("Nie udało się połączyć z bazą danych")
 	}
 
-	db.AutoMigrate(&models.Weather{})
-
-	// initWeatherData(db)
+	db.AutoMigrate(&models.Coord{}, &models.Weather{}, &models.Main{}, &models.Wind{}, &models.Rain{}, &models.Clouds{}, &models.Sys{}, &models.WeatherModel{})
 
 	e := echo.New()
 
@@ -40,17 +38,3 @@ func main() {
 
 	e.Logger.Fatal(e.Start(":3000"))
 }
-
-// func initWeatherData(db *gorm.DB) {
-// 	var count int64
-// 	db.Model(&models.Weather{}).Count(&count)
-
-// 	weathers := []models.Weather{
-// 		{Miasto: "Kraków", Temperatura: 22.5, Typ: "słonecznie"},
-// 		{Miasto: "Warszawa", Temperatura: 18.3, Typ: "pochmurno"},
-// 		{Miasto: "Łódź", Temperatura: 25.7, Typ: "deszczowo"},
-// 	}
-// 	for _, w := range weathers {
-// 		db.Create(&w)
-// 	}
-// }
