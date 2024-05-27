@@ -1,0 +1,7 @@
+organization=bananky
+projectKey=bananky_projektowanie-obiektowe
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.54596
+dashboardUrl=https://sonarcloud.io/dashboard?id=bananky_projektowanie-obiektowe
+ceTaskId=AY-7LwBlZCjL_gDTmq6q
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AY-7LwBlZCjL_gDTmq6q
