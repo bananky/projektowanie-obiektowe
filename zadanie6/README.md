@@ -15,3 +15,7 @@
 
 ## Security Rating
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bananky_projektowanie-obiektowe&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=bananky_projektowanie-obiektowe)
+
+
+## Duplicated Lines
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=bananky_projektowanie-obiektowe&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=bananky_projektowanie-obiektowe)
