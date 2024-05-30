@@ -1,0 +1,93 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px;
+  flex-wrap: wrap; 
+}
+
+.products-container, .cart-payments-container {
+  width: 100%;
+  max-width: 45%;
+  box-sizing: border-box;
+  margin-bottom: 20px; 
+}
+
+.cart-payments-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-container, .payments-container {
+  margin-top: 20px;
+  width: 100%; 
+  max-width: 90%; 
+}
+
+.cart-list {
+  list-style-type: none; 
+  padding: 0; 
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item button {
+  margin-left: 10px;
+}
+
+
+.product-list {
+  list-style-type: none; 
+  padding: 0; 
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.product-item button {
+  margin-left: 10px;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.payment-form input {
+  margin-top: 5px;
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
