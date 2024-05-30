@@ -23,6 +23,8 @@ public func configure(_ app: Application) async throws {
 
     // Use Leaf for views
     app.views.use(.leaf)
+    app.leaf.cache.isEnabled = app.environment.isRelease // opcjonalnie, dla włączenia cache w produkcji
+    app.directory = DirectoryConfiguration.detect()
 
     // Run migrations
     try await app.autoMigrate()

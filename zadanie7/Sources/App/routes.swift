@@ -1,21 +1,12 @@
-import Fluent
 import Vapor
 
 func routes(_ app: Application) throws {
-    // Renderowanie widoku głównego
-    app.get { req async throws in
-        try await req.view.render("index", ["title": "Hello Vapor!"])
-    }
-
-    // Endpoint "hello"
-    app.get("hello") { req async -> String in
-        "Hello, world!"
-    }
-
-    // Rejestracja kontrolera TodoController
-    try app.register(collection: TodoController())
-
-    // Rejestracja kontrolera ProductsController
     let productsController = ProductsController()
-    try app.register(collection: productsController)
+
+    app.get("products", use: productsController.index)
+    app.get("products", ":productID", use: productsController.show)
+    app.post("products", use: productsController.create)
+    app.put("products", ":productID", use: productsController.update)
+    app.get("products", ":productID", "delete", use: productsController.deleteHandler)
+    app.post("products", ":productID", "delete", use: productsController.delete)
 }

@@ -1,49 +1,71 @@
-import Fluent
 import Vapor
+import Fluent
 
-struct ProductsController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
-        let products = routes.grouped("products")
-        products.get(use: index)
-        products.post(use: create)
-        products.group(":productID") { product in
-            product.delete(use: delete)
-            product.put(use: update)
-            product.get(use: show)
+final class ProductsController {
+    
+    // Metoda do wyświetlania listy wszystkich produktów
+    func index(req: Request) throws -> EventLoopFuture<View> {
+        return Product.query(on: req.db).all().flatMap { products in
+            let context = ["products": products]
+            return req.view.render("/products/index", context)
         }
     }
-
-    func index(req: Request) throws -> EventLoopFuture<[Product]> {
-        return Product.query(on: req.db).all()
+    
+    // Metoda do wyświetlania pojedynczego produktu
+    func show(req: Request) throws -> EventLoopFuture<View> {
+        guard let productID = req.parameters.get("productID", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        return Product.find(productID, on: req.db).unwrap(or: Abort(.notFound)).flatMap { product in
+            let context = ["product": product]
+            return req.view.render("products/show", context)
+        }
     }
-
-    func create(req: Request) throws -> EventLoopFuture<Product> {
+    
+    // Metoda do tworzenia nowego produktu
+    func create(req: Request) throws -> EventLoopFuture<Response> {
         let product = try req.content.decode(Product.self)
-        return product.save(on: req.db).map { product }
+        return product.save(on: req.db).map {
+            return req.redirect(to: "products/create")
+        }
     }
-
-    func delete(req: Request) throws -> EventLoopFuture<HTTPStatus> {
-        return Product.find(req.parameters.get("productID"), on: req.db)
-            .unwrap(or: Abort(.notFound))
-            .flatMap { $0.delete(on: req.db) }
-            .transform(to: .ok)
-    }
-
-    func update(req: Request) throws -> EventLoopFuture<Product> {
+    
+    // Metoda do aktualizowania istniejącego produktu
+    func update(req: Request) throws -> EventLoopFuture<Response> {
+        guard let productID = req.parameters.get("productID", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
         let updatedProduct = try req.content.decode(Product.self)
-        return Product.find(req.parameters.get("productID"), on: req.db)
-            .unwrap(or: Abort(.notFound))
-            .flatMap { existingProduct in
-                existingProduct.name = updatedProduct.name
-                existingProduct.description = updatedProduct.description
-                existingProduct.price = updatedProduct.price
-                existingProduct.stock = updatedProduct.stock
-                return existingProduct.save(on: req.db).map { existingProduct }
+        return Product.find(productID, on: req.db).unwrap(or: Abort(.notFound)).flatMap { product in
+            product.name = updatedProduct.name
+            product.description = updatedProduct.description
+            return product.save(on: req.db).map {
+                return req.redirect(to: "products")
             }
+        }
     }
-
-    func show(req: Request) throws -> EventLoopFuture<Product> {
-        return Product.find(req.parameters.get("productID"), on: req.db)
-            .unwrap(or: Abort(.notFound))
+    
+    // Metoda do usuwania produktu
+    func delete(req: Request) throws -> EventLoopFuture<Response> {
+        guard let productID = req.parameters.get("productID", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        return Product.find(productID, on: req.db).unwrap(or: Abort(.notFound)).flatMap { product in
+            return product.delete(on: req.db).map {
+                return req.redirect(to: "products")
+            }
+        }
     }
+    
+    // Metoda obsługująca widok formularza usuwania produktu
+    func deleteHandler(req: Request) throws -> EventLoopFuture<View> {
+        guard let productID = req.parameters.get("productID", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        return Product.find(productID, on: req.db).unwrap(or: Abort(.notFound)).flatMap { product in
+            let context = ["product": product]
+            return req.view.render("delete", context)
+        }
+    }
+    
 }

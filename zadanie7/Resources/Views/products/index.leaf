@@ -1,0 +1,21 @@
+<h1>Products list</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Details</th>
+    </tr>
+    #for(product in products):
+        <tr>
+            <td>#(product.name)</td>
+            <td>#(product.price)</td>
+            <td>#(product.stock)</td>
+            <td><button onclick="location.href='/products/#(product.id)'" type="button">Details</button></td>
+        </tr>
+    #endfor        
+</table>
+
+<br>
+<button onclick="location.href='/products/create'" type="button">Add product</button>
