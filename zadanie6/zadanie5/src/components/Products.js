@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const Products = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
@@ -37,6 +38,10 @@ const Products = ({ addToCart }) => {
       </ul>
     </div>
   );
+};
+
+Products.propTypes = {
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default Products;

@@ -38,8 +38,6 @@ const Payments = () => {
       console.error('Error:', error);
     }
   };
-  
-  
 
   return (
     <div>
@@ -98,6 +96,5 @@ const Payments = () => {
     </div>
   );
 };
-
 
 export default Payments;
