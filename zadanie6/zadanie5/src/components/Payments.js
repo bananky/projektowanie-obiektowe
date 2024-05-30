@@ -42,53 +42,29 @@ const Payments = () => {
   return (
     <div>
       <h2>Płatności</h2>
-      <form onSubmit={handleSubmit} className="payment-form">
-        <div className="form-group">
+      <form onSubmit={handleSubmit}>
+        <div>
           <label>
-            Imię i nazwisko:
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+            Imię i nazwisko:{' '}
+            <input type="text" name="name" value={formData.name} onChange={handleChange} />
           </label>
         </div>
-        <div className="form-group">
+        <div>
           <label>
-            Numer karty:
-            <input
-              type="text"
-              name="cardNumber"
-              value={formData.cardNumber}
-              onChange={handleChange}
-              required
-            />
+            Numer karty:{' '}
+            <input type="text" name="cardNumber" value={formData.cardNumber} onChange={handleChange} />
           </label>
         </div>
-        <div className="form-group">
+        <div>
           <label>
-            Data ważności:
-            <input
-              type="text"
-              name="expirationDate"
-              value={formData.expirationDate}
-              onChange={handleChange}
-              required
-            />
+            Data ważności:{' '}
+            <input type="text" name="expirationDate" value={formData.expirationDate} onChange={handleChange} />
           </label>
         </div>
-        <div className="form-group">
+        <div>
           <label>
-            CVV:
-            <input
-              type="text"
-              name="cvv"
-              value={formData.cvv}
-              onChange={handleChange}
-              required
-            />
+            CVV:{' '}
+            <input type="text" name="cvv" value={formData.cvv} onChange={handleChange} />
           </label>
         </div>
         <button type="submit">Zapłać</button>
@@ -96,5 +72,4 @@ const Payments = () => {
     </div>
   );
 };
-
 export default Payments;
