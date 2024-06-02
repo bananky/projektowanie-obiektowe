@@ -49,3 +49,46 @@
 :white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/bananky/projektowanie-obiektowe/commit/199ce748ec643cd91d78519ddbe10bff82883941)
 
 
+**Zadanie 5** Wzorce behawioralne
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/ebiznes/commit/c21a0be1e6c74ea23b829f47fd042b2d088c988a)
+
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/bananky/ebiznes/commit/1afbeff02d85d0959536a1159a5653e8ae8f317c)
+
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/bananky/ebiznes/commit/1afbeff02d85d0959536a1159a5653e8ae8f317c)
+
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/bananky/ebiznes/commit/fb6b613be28288fe132a80134c0a50c17766d18b)
+
+:x: 5.0 wymaganie 5 
+
+
+**Zadanie 6** Zapaszki
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/projektowanie-obiektowe/commit/5d7cc0fcb688d6f7d7a933424e0100414a2cf95c) & [link](https://github.com/bananky/projektowanie-obiektowe/commit/10230990a18ee93d1cfd8270d2dbe43bb26878d5)
+
+:white_check_mark: 3.5 wymaganie 2 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bananky_projektowanie-obiektowe&metric=bugs)](https://sonarcloud.io/summary/new_code?id=bananky_projektowanie-obiektowe)
+
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/bananky/projektowanie-obiektowe/commit/04686095f7504cb9e62597866ab67447b8509e55) & [link](https://github.com/bananky/projektowanie-obiektowe/commit/9be9d73d7b1ab569a0b1a42b4793f4b4603e7dfd)
+
+:white_check_mark: 4.5 wymaganie 4 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bananky_projektowanie-obiektowe&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=bananky_projektowanie-obiektowe)
+
+
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bananky_projektowanie-obiektowe&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=bananky_projektowanie-obiektowe)
+
+
+:white_check_mark: 5.0 wymaganie 5 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=bananky_projektowanie-obiektowe&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=bananky_projektowanie-obiektowe)
+
+
+
+**Zadanie 7** Antywzorce
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/projektowanie-obiektowe/commit/d26b2384e32cfecc969d36ac781f0f0459b6010d)
+
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/bananky/projektowanie-obiektowe/commit/bbe20cb356120cb4407a1240836343953f677490)
+
+:x: 4.0 wymaganie 3 
+
+:x: 4.5 wymaganie 4 
+
+:x: 5.0 wymaganie 5 
+
