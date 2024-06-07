@@ -92,3 +92,30 @@
 
 :x: 5.0 wymaganie 5 
 
+
+
+**Zadanie 8** Mobile first (android)
+
+:x: 3.0 wymaganie 1 [Link do commita 1]()
+
+:x: 3.5 wymaganie 2 [Link do commita 2]()
+
+:x: 4.0 wymaganie 3 
+
+:x: 4.5 wymaganie 4 
+
+:x: 5.0 wymaganie 5 
+
+
+
+**Zadanie 9** Testy
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/projektowanie-obiektowe/commit/a80d66c02fdf6df3330a1278dd6d4c77700d2202)
+
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/bananky/projektowanie-obiektowe/commit/a80d66c02fdf6df3330a1278dd6d4c77700d2202)
+
+:x: 4.0 wymaganie 3 
+
+:x: 4.5 wymaganie 4 
+
+:x: 5.0 wymaganie 5 
