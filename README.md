@@ -96,9 +96,9 @@
 
 **Zadanie 8** Mobile first (android)
 
-:x: 3.0 wymaganie 1 [Link do commita 1]()
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/bananky/projektowanie-obiektowe/commit/d74d8e4c79b9aa7dcb3ef32bc5a765621489842e)
 
-:x: 3.5 wymaganie 2 [Link do commita 2]()
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/bananky/projektowanie-obiektowe/commit/acd09f80b4afa9d2161589d2c175dbb4e12a800f)
 
 :x: 4.0 wymaganie 3 
 
